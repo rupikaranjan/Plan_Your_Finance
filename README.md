@@ -36,7 +36,7 @@ Follow the following instructions before using the application.
 ```
 ---
 
-## Financial Planner For Emergencies
+## PART-1 : Financial Planner For Emergencies
     The members will be able to use this tool to visualize their current savings. The members can then determine if they have enough reserves for an emergency fund.
 1. Evaluate cryptocurrency wallet.
     * For prototype, we assume that the member has 1.2 bitcoins and 5.3 Ethereum in their wallet.
@@ -83,3 +83,50 @@ Follow the following instructions before using the application.
         3. Else the total portfolio is less than the emergency fund value, a message showing how many dollars away the member is from reaching the goal is displayed.
         
         ![emergency_fund_evaluation](Resources/Images/emergency_fund_evaluation.png)
+        
+---
+
+## PART-2 : Financial Planner For Retirement
+In this section, we’ll use the MCForecastTools library to create a Monte Carlo simulation for the member’s savings portfolio. The steps are:
+
+1. An API call via the Alpaca SDK is made to get 3 years of historical closing prices for a traditional 60/40 portfolio split: 60% stocks (SPY) and 40% bonds (AGG).
+    
+    ![hitorical_data](Resources/Images/hitorical_data.png)
+
+2. We run a Monte Carlo simulation of 500 samples and 30 years for the 60/40 portfolio, and the results are plottted.
+
+    ![30_Year_Simulation_plot](Resources/Images/30_Year_Simulation_plot.png)
+
+3. We plot the probability distribution of the Monte Carlo simulation.
+
+    ![30_Year_Simulation_prob_plot](Resources/Images/30_Year_Simulation_prob_plot.png)
+
+4. We generate the summary statistics for the Monte Carlo simulation.
+
+    ![30year_summary_statistics](Resources/Images/30year_summary_statistics.png)
+    
+5. Retirement Portfolio Forecast Analysis:
+    We calculate the range of the possible outcomes for the member's current stock/bond portfolio by using the `95%` confidence intervals from the simlation summary statistics 
+    
+    ![question1](Resources/Images/question1.png)
+    ![answer1](Resources/Images/answer1.png)
+    
+6. Cumulative Returns Forecast for 10 Years
+
+    The next objective is to adjust the retirement portfolio and run a new Monte Carlo simulation to find out if the changes will allow the member to retire earlier.
+
+    * Cumulative returns for 10 years from now is forecasted. To accumulate wealth for retirement in shortened investment horizon(compared to 30 years), the portfolio need to invest heavily in the riskier asset(that is, stock)
+
+    * The weights of the retirement portfolio is adjusted so that the composition for the Monte Carlo simulation consists of 20% bonds and 80% stocks. 
+
+    * We run the simulation over 500 samples, and use the same data that the API call to Alpaca generated.
+    
+    ![10_Year_Simulation_plot](Resources/Images/10_Year_Simulation_plot.png)
+    ![10_Year_Simulation_prob_plot](Resources/Images/10_Year_Simulation_prob_plot.png)
+    ![10year_summary_statistics](Resources/Images/10year_summary_statistics.png)
+    ![question2](Resources/Images/question2.png)
+    ![answer2](Resources/Images/answer2.png)
+    ![question3](Resources/Images/question3.png)
+    
+    
+    
